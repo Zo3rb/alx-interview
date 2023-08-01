@@ -13,21 +13,11 @@ def is_safe(board: int, row: int, col: int, N: int) -> bool:
         col (int): Number of the cells in Col.
     Returns: (bool) safe or not.
     """
-    # Check if there is a queen in the same column
     for i in range(row):
-        if board[i][col]:
+        if board[i][col] == 1 or \
+           (col - (row - i) >= 0 and board[i][col - (row - i)] == 1) or \
+           (col + (row - i) < N and board[i][col + (row - i)] == 1):
             return False
-
-    # Check upper diagonal on the left side
-    for i, j in zip(range(row, -1, -1), range(col, -1, -1)):
-        if board[i][j]:
-            return False
-
-    # Check upper diagonal on the right side
-    for i, j in zip(range(row, -1, -1), range(col, N)):
-        if board[i][j]:
-            return False
-
     return True
 
 
@@ -49,9 +39,10 @@ def solve_nqueens(N: int) -> list[list]:
     board = [[0 for _ in range(N)] for _ in range(N)]
     solutions = []
 
-    def backtrack(row: int) -> None:
+    def backtrack(row):
         if row == N:
-            solutions.append([[i, row] for i, row in enumerate(board)])
+            solution = [[i, board[i].index(1)] for i in range(N)]
+            solutions.append(solution)
             return
 
         for col in range(N):
