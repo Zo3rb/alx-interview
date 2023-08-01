@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """ Solution of N-Queens Problem. """
 
 import sys
