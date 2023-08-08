@@ -14,8 +14,8 @@ const API_URL = `https://swapi-api.alx-tools.com/api/films/${movieNum}`;
             for (let charLink of data.characters) {
                 request(charLink, (error, response, body) => {
                     if (!error) {
-                        body = JSON.parse(body);
-                        console.log(body.name);
+                        // body = JSON.parse(body);
+                        console.log(JSON.parse(body).name);
                     }
                 })
             }
